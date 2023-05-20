@@ -47,7 +47,7 @@ public class NumericApplicationTests {
     }
     
     
-
+    
 @Test
     public void welcomeMessage() throws Exception {
         this.mockMvc.perform(get("/")).andDo(print()).andExpect(status().isOk())
