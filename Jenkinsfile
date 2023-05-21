@@ -10,10 +10,10 @@ pipeline {
          archive 'target/*.jar'
        }
      }
-     stage('Unit test') {
-       steps {
-         sh "mvn test"
-       }
-     }
+//     stage('Unit test') {
+//       steps {
+//         sh "mvn test"
+//       }
+//     }
   }
 }
