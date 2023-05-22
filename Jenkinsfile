@@ -21,6 +21,7 @@ pipeline {
           jacoco execPattern: 'target/jacoco.exec'
         }
        }
+     }
      stage('docker build and push') {
        steps {
         sh 'printenv'
