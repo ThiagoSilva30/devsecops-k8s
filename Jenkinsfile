@@ -21,7 +21,7 @@ pipeline {
           jacoco execPattern: 'target/jacoco.exec'
         }
        }
-     stage('docker build and push')
+     stage('docker build and push') {
        steps {
         sh 'printenv'
 	sh 'docker build -t thiagodockerid/devsecops:""$GIT_COMMIT"" .'
