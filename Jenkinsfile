@@ -24,10 +24,12 @@ pipeline {
      }
      stage('docker build and push') {
        steps {
-        sh 'printenv'
-	sh 'docker build -t thiagodockerid/devsecops:""$GIT_COMMIT"" .'
-	sh 'docker push thiagodockerid/devsecops:""$GIT_COMMIT""' 
+	withDockerRegistry([credentialsId: "docker_credentials", url: ""]) {
+          sh 'printenv'
+       	  sh 'docker build -t thiagodockerid/devsecops:""$GIT_COMMIT"" .'
+	  sh 'docker push thiagodockerid/devsecops:""$GIT_COMMIT""' 
 	}		
       } 
    }
+  }
  }
