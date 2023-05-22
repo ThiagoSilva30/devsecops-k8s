@@ -1,0 +1,2 @@
+kubectl create deploy node-app --image siddharth67/node-service:v1
+kubectl expose deploy node-app --name node-svc --port 5000
