@@ -34,13 +34,18 @@ pipeline {
        }
      }
 
-     
-    stage('SonarQube - SAST') {
-    
-        steps {
-          sh "mvn clean verify sonar:sonar -Dsonar.projectKey=numeric-application -Dsonar.projectName='numeric-application'"
+node {
+  stage('SCM') {
+    checkout scm
+  }
+  stage('SonarQube Analysis') {
+    def mvn = tool 'Default Maven';
+    withSonarQubeEnv() {
+      sh "mvn clean verify sonar:sonar -Dsonar.projectKey=numeric-application -Dsonar.projectName='numeric-application'"
     }
   }
+}
+
 
      stage('docker build and push') {
        steps {
