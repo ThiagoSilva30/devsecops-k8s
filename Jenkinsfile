@@ -34,6 +34,14 @@ pipeline {
        }
      }
 
+     
+    stage('SonarQube - SAST') {
+    
+        steps {
+          sh "mvn clean verify sonar:sonar -Dsonar.projectKey=numeric-application -Dsonar.projectName='numeric-application'"
+    }
+  }
+
      stage('docker build and push') {
        steps {
 	        withDockerRegistry([credentialsId: "docker_credentials", url: ""]) {
