@@ -34,9 +34,16 @@ pipeline {
        }
      }
 
-    stage('SonarQube Analysis') {
+    stage('SonarQube - SAST') {
       steps {
-        sh "mvn sonar:sonar -Dsonar.projectKey=numeric-application -Dsonar.login=sqp_9f94734da3087edd2436aa3b0640d957d09e2aba -Dsonar.projectName='numeric-application'"
+        withSonarQubeEnv('SonarQube') {
+          sh "mvn sonar:sonar -Dsonar.projectKey=numeric-application -Dsonar.projectName='numeric-application'"
+        }
+        timeout(time: 2, unit: 'MINUTES'){
+          script {
+            waitForQualityGate abortPipeline: true
+           }
+          }
       }
     }
 
